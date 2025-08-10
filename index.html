@@ -1,1 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saksham Biosurgical Services</title>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: white;
+        padding: 10px 20px;
+        border-bottom: 2px solid #ddd;
+    }
+    .logo {
+        height: 50px;
+    }
+    nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+    }
+    nav ul li {
+        margin-left: 20px;
+    }
+    nav ul li a {
+        text-decoration: none;
+        color: black;
+        font-weight: bold;
+    }
+    .company-name {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #007BFF; /* Medical Blue */
+    }
+    /* Slider */
+    .slider {
+        position: relative;
+        max-width: 100%;
+        height: 400px;
+        overflow: hidden;
+    }
+    .slides {
+        display: flex;
+        width: 500%;
+        animation: slide 20s infinite;
+    }
+    .slides img {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+    }
+    @keyframes slide {
+        0% { transform: translateX(0%); }
+        20% { transform: translateX(0%); }
+        25% { transform: translateX(-100%); }
+        45% { transform: translateX(-100%); }
+        50% { transform: translateX(-200%); }
+        70% { transform: translateX(-200%); }
+        75% { transform: translateX(-300%); }
+        95% { transform: translateX(-300%); }
+        100% { transform: translateX(-400%); }
+    }
+    /* Cards */
+    .cards {
+        display: flex;
+        justify-content: space-around;
+        margin: 40px 0;
+    }
+    .card {
+        background: #f5f5f5;
+        padding: 20px;
+        border-radius: 10px;
+        width: 30%;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        text-align: center;
+    }
+    /* About section */
+    .about {
+        display: flex;
+        align-items: center;
+        padding: 40px;
+        background: #eef6fb;
+    }
+    .about-text {
+        flex: 1;
+        padding-right: 20px;
+    }
+    .about img {
+        flex: 1;
+        max-width: 100%;
+        border-radius: 10px;
+    }
+    /* Footer */
+    footer {
+        background: #333;
+        color: white;
+        text-align: center;
+        padding: 20px;
+    }
+    footer small {
+        display: block;
+        margin-top: 10px;
+        font-size: 0.8rem;
+        color: #bbb;
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <img src="logo.png" alt="Saksham Logo" class="logo">
+    <div class="company-name">Saksham Biosurgical Services</div>
+    <nav>
+        <ul>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#network">Network</a></li>
+            <li><a href="#register">Register</a></li>
+            <li><a href="#career">Career</a></li>
+            <li><a href="#inquiry">Inquiry</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Slider -->
+<div class="slider">
+    <div class="slides">
+        <img src="images/photo1.jpg" alt="Photo 1">
+        <img src="images/photo2.jpg" alt="Photo 2">
+        <img src="images/photo3.jpg" alt="Photo 3">
+        <img src="images/photo4.jpg" alt="Photo 4">
+        <img src="images/photo5.jpg" alt="Photo 5">
+    </div>
+</div>
+
+<!-- Cards -->
+<div class="cards">
+    <div class="card">
+        <h3>Products</h3>
+        <p>We provide a wide range of hospital equipment...</p>
+    </div>
+    <div class="card">
+        <h3>Our Network</h3>
+        <p>We have a strong network of suppliers and hospitals...</p>
+    </div>
+    <div class="card">
+        <h3>Contact Us</h3>
+        <p>Reach out to us for your requirements...</p>
+    </div>
+</div>
+
+<!-- About Section -->
+<div class="about" id="about">
+    <div class="about-text">
+        <h2>About Our Company</h2>
+        <p>Saksham Biosurgical Services deals in hospital equipment and machines...</p>
+        <h4>Corporate Office</h4>
+        <p>XYZ Street, City, India</p>
+        <h4>Contact</h4>
+        <p>+91-XXXXXXXXXX</p>
+        <h4>Offices in India</h4>
+        <p>Delhi, Mumbai, Kolkata, Bangalore...</p>
+    </div>
+    <img src="images/about-photo.jpg" alt="About Company">
+</div>
+
+<!-- Footer -->
+<footer>
+    <p>© 2025 Saksham Biosurgical Services. All rights reserved.</p>
+    <small>About Us | Products | Network | Register | Career | Inquiry | Contact Us</small>
+</footer>
+
+</body>
+</html>
 
