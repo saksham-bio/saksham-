@@ -9,175 +9,200 @@
         margin: 0;
         font-family: Arial, sans-serif;
     }
-    header {
-        display: flex;
-        justify-content: space-between;
+
+    /* HEADER */
+    .topbar {
+        display: grid;
+        grid-template-columns: auto 1fr auto; /* menu | company name | logo */
         align-items: center;
         background-color: white;
         padding: 10px 20px;
         border-bottom: 2px solid #ddd;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
     }
-    .logo {
-        height: 50px;
-    }
-    nav ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
+
+    /* Menu (Left) */
+    .nav-left {
         display: flex;
+        gap: 14px;
+        align-items: center;
     }
-    nav ul li {
-        margin-left: 20px;
-    }
-    nav ul li a {
+    .nav-left a {
+        padding: 8px 10px;
+        border-radius: 6px;
+        color: #555; /* muted gray */
+        font-weight: 600;
         text-decoration: none;
-        color: black;
-        font-weight: bold;
     }
+    .nav-left a:hover,
+    .nav-left a.active {
+        background: #f1f7fb; /* light hospital-blue */
+        color: #007BFF; /* bright blue */
+    }
+
+    /* Company Name (Center) */
     .company-name {
-        font-size: 1.8rem;
+        font-size: 2.5rem; /* bigger */
         font-weight: bold;
-        color: #007BFF; /* Medical Blue */
+        color: #007BFF; /* hospital blue */
+        text-align: center;
     }
-    /* Slider */
+
+    /* Logo (Right) */
+    .logo {
+        height: 70px; /* bigger logo */
+    }
+
+    /* SLIDER */
     .slider {
         position: relative;
         max-width: 100%;
-        height: 400px;
+        height: 650px; /* taller so photos aren't cut */
         overflow: hidden;
+        background: #000;
     }
-    .slides {
-        display: flex;
-        width: 500%;
-        animation: slide 20s infinite;
+    .slide {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        animation: fadeBox 25s infinite;
     }
-    .slides img {
+    .slide img {
         width: 100%;
-        height: 400px;
-        object-fit: cover;
+        height: 100%;
+        object-fit: cover; /* covers the box but keeps proportions */
+        object-position: center top; /* focus higher up */
     }
-    @keyframes slide {
-        0% { transform: translateX(0%); }
-        20% { transform: translateX(0%); }
-        25% { transform: translateX(-100%); }
-        45% { transform: translateX(-100%); }
-        50% { transform: translateX(-200%); }
-        70% { transform: translateX(-200%); }
-        75% { transform: translateX(-300%); }
-        95% { transform: translateX(-300%); }
-        100% { transform: translateX(-400%); }
+    .slide:nth-child(1) { animation-delay: 0s; }
+    .slide:nth-child(2) { animation-delay: 5s; }
+    .slide:nth-child(3) { animation-delay: 10s; }
+    .slide:nth-child(4) { animation-delay: 15s; }
+    .slide:nth-child(5) { animation-delay: 20s; }
+
+    @keyframes fadeBox {
+        0%   { opacity: 0; transform: scale(1.05); }
+        4%   { opacity: 1; transform: scale(1); }
+        20%  { opacity: 1; }
+        24%  { opacity: 0; transform: scale(0.98); }
+        100% { opacity: 0; }
     }
-    /* Cards */
+
+    /* CARDS */
     .cards {
         display: flex;
-        justify-content: space-around;
-        margin: 40px 0;
+        gap: 20px;
+        justify-content: center;
+        padding: 40px 20px;
     }
     .card {
-        background: #f5f5f5;
-        padding: 20px;
+        background: #f9f9f9;
         border-radius: 10px;
-        width: 30%;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        padding: 20px;
+        flex: 1;
+        max-width: 300px;
         text-align: center;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
-    /* About section */
-    .about {
+    .card h3 {
+        color: #007BFF;
+    }
+
+    /* ABOUT SECTION */
+    .about-section {
         display: flex;
+        gap: 20px;
+        padding: 40px 20px;
         align-items: center;
-        padding: 40px;
-        background: #eef6fb;
+    }
+    .about-section img {
+        width: 50%;
+        border-radius: 10px;
     }
     .about-text {
-        flex: 1;
-        padding-right: 20px;
+        width: 50%;
     }
-    .about img {
-        flex: 1;
-        max-width: 100%;
-        border-radius: 10px;
-    }
-    /* Footer */
+
+    /* FOOTER */
     footer {
-        background: #333;
-        color: white;
-        text-align: center;
+        background: #f1f1f1;
         padding: 20px;
+        text-align: center;
+        font-size: 0.9rem;
+        color: #555;
     }
-    footer small {
-        display: block;
-        margin-top: 10px;
+    .footer-links {
+        margin-top: 5px;
         font-size: 0.8rem;
-        color: #bbb;
     }
 </style>
 </head>
 <body>
 
-<header>
-    <img src="07.png" alt="Saksham Logo" class="logo">
-    <div class="company-name">Saksham Biosurgical Services</div>
-    <nav>
-        <ul>
-            <li><a href="#about">About Us</a></li>
-            <li><a href="#products">Products</a></li>
-            <li><a href="#network">Network</a></li>
-            <li><a href="#register">Register</a></li>
-            <li><a href="#career">Career</a></li>
-            <li><a href="#inquiry">Inquiry</a></li>
-            <li><a href="#contact">Contact Us</a></li>
-        </ul>
+<!-- HEADER -->
+<div class="topbar">
+    <!-- Menu Left -->
+    <nav class="nav-left">
+        <a href="#about">About Us</a>
+        <a href="#products">Products</a>
+        <a href="#network">Network</a>
+        <a href="#register">Register</a>
+        <a href="#career">Career</a>
+        <a href="#inquiry">Inquiry</a>
+        <a href="#contact">Contact Us</a>
     </nav>
-</header>
 
-<!-- Slider -->
-<div class="slider">
-    <div class="slides">
-        <img src="images/01.png" alt="Photo 1">
-        <img src="images/02.png" alt="Photo 2">
-        <img src="images/03.png" alt="Photo 3">
-        <img src="images/04.png" alt="Photo 4">
-        <img src="images/05.png" alt="Photo 5">
-    </div>
+    <!-- Company Name Center -->
+    <div class="company-name">Saksham Biosurgical Services</div>
+
+    <!-- Logo Right -->
+    <img src="images/08.png" alt="Saksham Logo" class="logo">
 </div>
 
-<!-- Cards -->
+<!-- SLIDER -->
+<div class="slider">
+    <div class="slide"><img src="images/01.png" alt="Photo 1"></div>
+    <div class="slide"><img src="images/02.png" alt="Photo 2"></div>
+    <div class="slide"><img src="images/03.png" alt="Photo 3"></div>
+    <div class="slide"><img src="images/04.png" alt="Photo 4"></div>
+    <div class="slide"><img src="images/05.png" alt="Photo 5"></div>
+</div>
+
+<!-- CARDS -->
 <div class="cards">
     <div class="card">
         <h3>Products</h3>
-        <p>We provide a wide range of hospital equipment...</p>
+        <p>We provide a wide range of hospital equipment and machines.</p>
     </div>
     <div class="card">
         <h3>Our Network</h3>
-        <p>We have a strong network of suppliers and hospitals...</p>
+        <p>We have a strong presence across various regions in India.</p>
     </div>
     <div class="card">
         <h3>Contact Us</h3>
-        <p>Reach out to us for your requirements...</p>
+        <p>Reach out for any inquiries or collaborations.</p>
     </div>
 </div>
 
-<!-- About Section -->
-<div class="about" id="about">
+<!-- ABOUT -->
+<div class="about-section" id="about">
     <div class="about-text">
-        <h2>About Our Company</h2>
-        <p>Saksham Biosurgical Services deals in hospital equipment and machines...</p>
-        <h4>Corporate Office</h4>
-        <p>XYZ Street, City, India</p>
-        <h4>Contact</h4>
-        <p>+91-XXXXXXXXXX</p>
-        <h4>Offices in India</h4>
-        <p>Delhi, Mumbai, Kolkata, Bangalore...</p>
+        <h2>About Saksham Biosurgical Services</h2>
+        <p>We are dedicated to providing top-quality medical equipment to hospitals and healthcare facilities across India.</p>
     </div>
     <img src="images/08.png" alt="About Company">
 </div>
 
-<!-- Footer -->
+<!-- FOOTER -->
 <footer>
+    <p>Corporate Office: XYZ Address, India | Contact: +91-XXXXXXXXXX</p>
+    <p>Offices in India: Delhi, Mumbai, Bangalore, Chennai</p>
     <p>© 2025 Saksham Biosurgical Services. All rights reserved.</p>
-    <small>About Us | Products | Network | Register | Career | Inquiry | Contact Us</small>
+    <div class="footer-links">
+        About Us | Products | Network | Register | Career | Inquiry | Contact Us
+    </div>
 </footer>
 
 </body>
 </html>
-
