@@ -134,7 +134,17 @@
         text-align: center;
         font-size: 14px;
     }
-
+    /* Mobile responsiveness */
+    @media(max-width:900px){
+      .brand{position:static;transform:none}
+      .topbar{justify-content:space-between}
+      .nav-left{display:none}
+      .mobile-nav-toggle{display:block}
+      .cards{grid-template-columns:1fr}
+      .about-section{flex-direction:column}
+      .about-image{width:100%}
+      .slider{height:220px}
+    }
     /* WhatsApp Button */
     .whatsapp-float {
         position: fixed;
