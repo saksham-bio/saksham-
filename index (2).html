@@ -1,0 +1,444 @@
+<!--
+Saksham Biosurgical Services - Single-file website (index.html)
+Instructions:
+ - Put your images in a folder named `images/` next to this file.
+ - Replace images/photo1.jpg ... photo5.jpg and images/logo.png with your real files.
+ - Open this file in a browser or host on GitHub Pages (push to a repo and enable Pages).
+
+This is a single-page app that behaves like multiple pages using hash navigation (#about, #products, etc.).
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Saksham Biosurgical Services</title>
+  <style>
+    :root{
+      --accent:#0066a1;
+      --muted:#666;
+      --card-bg:#fff;
+      --bg:#f6f8fb;
+      --max-width:1100px;
+      --header-height:76px;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:#222}
+    a{color:inherit;text-decoration:none}
+
+    /* Header */
+    header{background:#fff;position:sticky;top:0;z-index:50;box-shadow:0 2px 6px rgba(20,20,40,0.06)}
+    .container{max-width:var(--max-width);margin:0 auto;padding:0 18px}
+    .topbar{
+       position: fixed;
+       top: 0;
+       left: 0;
+       right: 0;
+       background: white;
+       display: flex;
+       align-items: center;
+       justify-content: space-between;
+       padding: 10px 30px;
+       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+       z-index: 1000;
+    }        
+    /* Logo + Name + Tagline */
+   .logo-container {
+       display: flex;
+       align-items: center;
+       gap: 0; /*   No gap between logo and text */
+   }
+   .logo {
+       height: 60px;
+       width: 60px;
+       object-fit: contain;
+   }
+   .brand-text {
+       display: flex;
+       flex-direction: column;
+       line-height: 1.2;
+   }
+
+   .company-name {
+       margin: 0;
+       font-size: 26px;
+       font-weight: bold;
+       color: #666; /* Blue company name 2E86C1 */
+   }
+
+   .tagline {
+       margin: 0;
+       font-size: 14px;
+       color: #666;
+   }
+   /* Menu */
+   .menu {
+       display: flex;
+       gap: 15px;
+   }
+
+   .menu a {
+       text-decoration: none;
+       color: #333;
+       font-weight: 600;
+       padding: 6px 10px;
+       border-radius: 4px;
+       transition: background 0.3s, color 0.3s;
+   }
+
+   .menu a:hover {
+       background: #f0f8ff; /* Light blue background */
+       color: #3399FF; /* Blue text on hover */
+   }
+   
+    
+
+    /* Hero / Slider */
+    .hero{margin-top:18px}
+    .slider{height:500px;
+            max-width:var(--max-width);
+            margin:0 auto;
+            border-radius:12px;
+            overflow:hidden;
+            position:relative;
+            background:#000;
+            aspect-ratio: 16 / 9;
+           }
+    .slide{position:absolute;
+           inset:0;
+           display:flex;
+           align-items:center;
+           justify-content:center}
+    .slide img{width:100%;
+               height:100%;
+               object-fit:contain;
+               background-color:#000;
+               display:block}
+
+    /* Fade-in-out box animation using staggered animation delays */
+    .slide{opacity:0;transform:scale(1.02);}
+    .slide:nth-child(1){animation:fadeBox 35s infinite;animation-delay:0s}
+    .slide:nth-child(2){animation:fadeBox 35s infinite;animation-delay:5s}
+    .slide:nth-child(3){animation:fadeBox 35s infinite;animation-delay:10s}
+    .slide:nth-child(4){animation:fadeBox 35s infinite;animation-delay:15s}
+    .slide:nth-child(5){animation:fadeBox 35s infinite;animation-delay:20s}
+
+    @keyframes fadeBox{
+      0%{opacity:0;transform:scale(1.05)}
+      4%{opacity:1;transform:scale(1)}
+      20%{opacity:1}
+      24%{opacity:0;transform:scale(0.98)}
+      100%{opacity:0}
+    }
+
+    /* Cards */
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:26px auto;max-width:var(--max-width);padding:0 18px}
+    .card{background:var(--card-bg);padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(20,30,60,0.06);min-height:140px}
+    .card h3{margin:0 0 8px}
+    .card p{margin:0;color:var(--muted)}
+
+    /* About / two-column */
+    .about-section{max-width:var(--max-width);margin:22px auto;background:#fff;border-radius:12px;padding:20px;display:flex;gap:20px;align-items:center}
+    .about-text{flex:1}
+    .about-text h2{margin-top:0}
+    .about-text p{color:var(--muted);line-height:1.5}
+    .about-image{width:360px;flex-shrink:0}
+    .about-image img{width:100%;border-radius:10px;height:240px;object-fit:cover}
+
+    /* Footer */
+    footer{margin-top:26px;background:#0b1b2b;color:#ddd;padding:22px 0}
+    .footer-inner{max-width:var(--max-width);margin:0 auto;display:flex;gap:20px;align-items:flex-start;justify-content:space-between;padding:0 18px}
+    .footer-left{flex:1}
+    .footer-col{margin-bottom:12px}
+    .footer-links{display:flex;gap:10px;flex-wrap:wrap;font-size:13px}
+    .footer-small{font-size:12px;color:#9fb4c8;margin-top:12px}
+    /* Reset */
+  
+    /* Mobile responsiveness */
+    @media(max-width:900px){
+      .brand{position:static;transform:none}
+      .topbar{justify-content:space-between}
+      .nav-left{display:none}
+      .mobile-nav-toggle{display:block}
+      .cards{grid-template-columns:1fr}
+      .about-section{flex-direction:column}
+      .about-image{width:100%}
+      .slider{height:220px}
+    }
+    /* WhatsApp Button */
+    .whatsapp-float {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #25D366;
+        padding: 10px;
+        border-radius: 50%;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        z-index: 1000;
+    }
+    .whatsapp-float img {
+        width: 40px;
+        height: 40px;
+    }
+    .whatsapp-float:hover {
+        background: #20b954;
+    }
+
+    /* simple hidden page sections */
+    section.page{display:none;padding:18px}
+    section.page.active{display:block}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+    /* tiny helpers */
+    .muted{color:var(--muted)}
+    .btn{display:inline-block;padding:8px 12px;border-radius:8px;background:var(--accent);color:#fff;font-weight:700}
+  </style>
+</head>
+<body>
+    <!-- Topbar -->
+<header class="topbar">
+
+    <div class="logo-container">
+        <img src="images/logo.jpeg" alt="Logo" class="logo">
+        <div class="brand-text">
+        
+           <a href="index.html" style="text-decoration: none; color: inherit;">
+           
+            <h1 class="company-name">Saksham Biosurgical Services</h1>
+            <p class="tagline">Your Partner In Medical Excellence</p>
+            </a>
+        </div>
+    </div>
+
+    <nav class="menu">
+        <a href="#about">About Us</a>
+        <a href="#products">Products</a>
+        <a href="#network">Network</a>
+        <a href="#register">Register</a>
+        <a href="#career">Career</a>
+        <a href="#inquiry">Inquiry</a>
+        <a href="#contact">Contact Us</a>
+    </nav>
+</header>
+
+  <!-- Pages (single file) -->
+  <main>
+    <!-- Home / Hero -->
+    <section id="home" class="page active">
+      <div class="hero container">
+        <div class="slider" role="img" aria-label="Work images slideshow">
+          <!-- Replace these src paths with your 5 images (photo1..photo5) -->
+          <div class="slide"><img src="images/01.png" alt="Photo 1 - clinical"></div>
+          <div class="slide"><img src="images/02.png" alt="Photo 2 - production"></div>
+          <div class="slide"><img src="images/03.png" alt="Photo 3 - mgps plant"></div>
+          <div class="slide"><img src="images/04.png" alt="Photo 4 - doctor and patient"></div>
+          <div class="slide"><img src="images/05.png" alt="Photo 5 - equipment"></div>
+        </div>
+
+        <!-- three cards -->
+        <div class="cards" style="margin-top:20px">
+          <div class="card">
+            <h3>Products</h3>
+            <p class="muted">Write about your product categories, key machines, and top sellers here.</p>
+          </div>
+          <div class="card">
+            <h3>Our Network</h3>
+            <p class="muted">Summarize your geographic presence, distribution partners or hospitals you serve.</p>
+          </div>
+          <div class="card">
+            <h3>Contact Us</h3>
+            <p class="muted">List quick contact point, email, phone or a short enquiry form link.</p>
+          </div>
+        </div>
+
+        <!-- about brief two-col -->
+        <div class="about-section container" style="margin-top:18px">
+          <div class="about-text">
+            <h2>About Saksham Biosurgical Services</h2>
+            <p>Founded in 2021, Saksham Biosurgical Services is a trusted provider of high-quality hospital equipment and comprehensive healthcare solutions. 
+             We specialize in supplying and servicing a wide range of medical systems, including Medical Gas Pipeline Systems (MGPS), critical care equipment, physiotherapy devices, operation theatre (OT) setups, hospital beds, and more.
+
+We also offer refurbished medical equipment, ensuring cost-effective options without compromising on performance or safety. Our mission is to equip healthcare facilities with reliable, efficient, and advanced technology that supports better patient care.</p>
+
+            <div style="margin-top:12px;display:flex;gap:12px;flex-wrap:wrap">
+              <div>
+                <strong>Corporate Office</strong><br>
+                <span class="muted">City, State, PIN</span>
+              </div>
+              <div>
+                <strong>Contact</strong><br>
+                <span class="muted">+91-7532040386 | sakshambiosurgicalservices@gmail.com</span>
+              </div>
+             
+            </div>
+          </div>
+          <div class="about-image">
+            <img src="images/08.png" alt="About image - replace images/about.jpg">
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+<body>
+    <!-- Header White Section with Border -->
+    <section class="about-header">
+        <h1>About</h1>
+    </section>
+
+   <!-- Other pages (simple sections)    about us -->
+   
+    <section id="about" class="page">
+    <div class="container">
+    <div class="about-text">
+            <h2><span class="company-name"></span></h2>
+        <h2>About Us</h2>
+        <p>
+            Founded in 2021, <strong>Saksham Biosurgical Services</strong> is a trusted provider of high-quality hospital equipment and comprehensive healthcare solutions. 
+            We specialize in supplying and servicing a wide range of medical systems, including Medical Gas Pipeline Systems (MGPS), critical care equipment, 
+            physiotherapy devices, operation theatre (OT) setups, hospital beds, and more.
+        </p>
+        <p>
+            We also offer refurbished medical equipment, ensuring cost-effective options without compromising on performance or safety. Our mission is to equip healthcare facilities with 
+            reliable, efficient, and advanced technology that supports better patient care.
+        </p>
+        <p>
+            With a commitment to quality, integrity, and customer satisfaction, our team works closely with hospitals, clinics, and healthcare professionals 
+            to deliver tailored solutions and responsive support. Whether it’s installation, maintenance, or upgrades, we ensure every project meets 
+            the highest standards of safety and performance.
+        </p>
+        <h3>Our Mission:</h3>
+        <p>
+            To provide reliable, efficient, and high-quality solutions that exceed client expectations while upholding the highest standards of safety and integrity.
+        </p>
+    </div>
+    </div>
+     <!-- Right Side Image -->
+    <div class="about-image">
+        <img src="images/about.png" alt="About Saksham Biosurgical Services">
+    </div>
+    </section>
+</body>     
+
+    <section id="products" class="page">
+      <div class="container">
+        <h1>Products</h1>
+        <p class="muted">(Describe product categories, machine specs, downloadable brochures, and add product images or links.)</p>
+      </div>
+    </section>
+
+    <section id="network" class="page">
+      <div class="container">
+        <h1>Our Network</h1>
+        <p class="muted">(List distributors, service centers, partners and map.)</p>
+      </div>
+    </section>
+
+    <section id="register" class="page">
+      <div class="container">
+        <h1>Register</h1>
+        <p class="muted">(Registration form or dealer signup goes here.)</p>
+      </div>
+    </section>
+
+    <section id="career" class="page">
+      <div class="container">
+        <h1>Career</h1>
+        <p class="muted">(Open positions and application instructions.)</p>
+      </div>
+    </section>
+
+    <section id="inquiry" class="page">
+      <div class="container">
+        <h1>Inquiry</h1>
+        <p class="muted">(A short contact form or instructions to send procurement inquiries.)</p>
+      </div>
+    </section>
+
+    <section id="contact" class="page">
+      <div class="container">
+        <h1>Contact Us</h1>
+        <p class="muted">Phone: +91-XXXXXXXXXX<br>Email: email@yourdomain.com<br>Address: Corporate Office address here.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner container">
+      <div class="footer-left">
+        <strong>Saksham Biosurgical Services</strong>
+        <div class="footer-col footer-small">&copy; <span id="year"></span> Saksham Biosurgical Services — All rights reserved.</div>
+        <div class="footer-links">
+          <a href="#about" class="muted">About</a>
+          <a href="#products" class="muted">Products</a>
+          <a href="#network" class="muted">Network</a>
+          <a href="#register" class="muted">Register</a>
+          <a href="#career" class="muted">Career</a>
+          <a href="#inquiry" class="muted">Inquiry</a>
+          <a href="#contact" class="muted">Contact</a>
+        </div>
+      </div>
+      <div style="min-width:220px;text-align:right">
+        <div class="muted">Corporate office • Contact us • Office in India</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Set year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Hash-based navigation to show different sections as separate pages
+    const pages = document.querySelectorAll('section.page');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    function showPage(id){
+      pages.forEach(p=> p.classList.toggle('active', p.id===id));
+      navLinks.forEach(a=> a.classList.toggle('active', a.getAttribute('data-target')===id));
+    }
+
+    function handleHash(){
+      let id = location.hash.replace('#','') || 'home';
+      // if user clicked a nav link with id that equals 'contact' etc. keep it
+      const valid = Array.from(pages).map(p=>p.id);
+      if(!valid.includes(id)) id = 'home';
+      showPage(id);
+    }
+    window.addEventListener('hashchange', handleHash);
+    window.addEventListener('load', handleHash);
+
+    // Make nav links update hash without full page reload
+    navLinks.forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        e.preventDefault();
+        const target = a.getAttribute('data-target')||'home';
+        location.hash = target;
+      })
+    })
+
+    // Accessibility: allow keyboard to move through slides (left/right)
+    let slideIndex = 0;
+    const totalSlides = 5; // change if you add/remove slides
+    window.addEventListener('keydown', (e)=>{
+      if(e.key === 'ArrowRight'){
+        slideIndex = (slideIndex+1)%totalSlides; seekToSlide(slideIndex);
+      } else if(e.key === 'ArrowLeft'){
+        slideIndex = (slideIndex-1+totalSlides)%totalSlides; seekToSlide(slideIndex);
+      }
+    })
+    function seekToSlide(i){
+      // jump the animation by changing inline animationDelay on container slides
+      const slides = document.querySelectorAll('.slide');
+      slides.forEach((s, idx)=>{
+        // shift each slide's animation so the i-th slide becomes visible immediately
+        const offset = -i*5; // because each slide is delayed by 5s in CSS
+        s.style.animationDelay = (parseFloat(getComputedStyle(s).animationDelay) + offset) + 's';
+      })
+    }
+  </script>
+</body>
+</html>
+
